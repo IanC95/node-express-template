@@ -88,3 +88,16 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+/**
+ * Attempt to Gracefully Shutdown Application
+ */
+const startGracefulShutdown = () => {
+  console.log('Starting shutdown of express...');
+  server.close(function () {
+    console.log('Express shut down.');
+  });
+};
+
+process.on('SIGTERM', startGracefulShutdown);
+process.on('SIGINT', startGracefulShutdown);
